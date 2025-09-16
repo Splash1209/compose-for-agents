@@ -11,6 +11,19 @@
 
 **These demos are for educational purposes only. Do not use default configurations in production.**
 
+### 🛠️ Quick Security Setup
+
+After cloning this repository, run the security setup script:
+
+```bash
+./setup-security.sh
+```
+
+This will:
+- Install an optional pre-commit hook to prevent committing secrets
+- Create `.env` files from templates where needed
+- Provide security reminders and guidelines
+
 ---
 
 ## Prerequisites
