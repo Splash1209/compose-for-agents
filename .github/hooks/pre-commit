@@ -1,0 +1,57 @@
+#!/bin/bash
+# Pre-commit hook to prevent committing sensitive files
+# To install: cp .github/hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+# Colors for output
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+echo -e "${GREEN}🔍 Checking for sensitive files...${NC}"
+
+# Files that should never be committed
+SENSITIVE_PATTERNS=(
+    "\.env$"
+    "\.env\.local$"
+    "\.env\.production$"
+    "secret\..*"
+    ".*\.key$"
+    ".*\.pem$"
+    "credentials\.json$"
+    "service-account\.json$"
+)
+
+# Check for sensitive file patterns
+FOUND_SENSITIVE=false
+for pattern in "${SENSITIVE_PATTERNS[@]}"; do
+    if git diff --cached --name-only | grep -E "$pattern"; then
+        echo -e "${RED}❌ Sensitive file detected: $(git diff --cached --name-only | grep -E "$pattern")${NC}"
+        FOUND_SENSITIVE=true
+    fi
+done
+
+# Check for potential passwords in file content
+if git diff --cached | grep -E "(password|secret|token|key).*=.*[^$]" | grep -v "env.example\|env.template\|env.sample\|README\|SECURITY"; then
+    echo -e "${RED}❌ Potential hardcoded credentials detected in file content${NC}"
+    FOUND_SENSITIVE=true
+fi
+
+# Check for common default passwords
+if git diff --cached | grep -E "(password.*password|admin.*admin|root.*root|123456|password123)"; then
+    echo -e "${RED}❌ Default/weak passwords detected${NC}"
+    FOUND_SENSITIVE=true
+fi
+
+if [ "$FOUND_SENSITIVE" = true ]; then
+    echo -e "${RED}🚫 Commit blocked - sensitive data detected!${NC}"
+    echo -e "${YELLOW}Please:${NC}"
+    echo "  1. Remove sensitive files from staging: git reset HEAD <file>"
+    echo "  2. Add sensitive files to .gitignore"
+    echo "  3. Use environment variables for credentials"
+    echo "  4. See SECURITY.md for guidelines"
+    exit 1
+fi
+
+echo -e "${GREEN}✅ No sensitive data detected${NC}"
+exit 0

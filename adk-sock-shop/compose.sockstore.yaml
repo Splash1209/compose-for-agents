@@ -29,8 +29,7 @@ services:
     hostname: catalogue-db
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?Please set MYSQL_ROOT_PASSWORD in your environment}
       - MYSQL_DATABASE=socksdb
 
   # Customer Review Database
@@ -40,8 +39,8 @@ services:
     ports:
       - 27017:27017
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME:-admin}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD:?Please set MONGO_ROOT_PASSWORD in your environment}
       - MONGO_INITDB_DATABASE=sockstore
     volumes:
       - ./data/mongodb:/docker-entrypoint-initdb.d:ro

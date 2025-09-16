@@ -5,7 +5,13 @@ build-adk-ui-image:
 	docker buildx build --builder hydrobuild --platform linux/amd64,linux/arm64 --tag jimclark106/supplier_agent_ui:latest --push --file Dockerfile.adk-ui .
 
 gateway-secrets:
-	docker mcp secret set 'mongodb.connection_string=mongodb://admin:password@mongodb:27017/' && \
+	@echo "⚠️  Checking for required environment variables..."
+	@if [ -z "$(MONGO_ROOT_PASSWORD)" ]; then echo "❌ MONGO_ROOT_PASSWORD not set. Please set this in your .env file and source it."; exit 1; fi
+	@if [ -z "$(RESEND_API_KEY)" ]; then echo "❌ RESEND_API_KEY not set"; exit 1; fi
+	@if [ -z "$(BRAVE_API_KEY)" ]; then echo "❌ BRAVE_API_KEY not set"; exit 1; fi
+	@if [ -z "$(OPENAI_API_KEY)" ]; then echo "❌ OPENAI_API_KEY not set"; exit 1; fi
+	@echo "✅ All required variables set"
+	docker mcp secret set 'mongodb.connection_string=mongodb://$(MONGO_ROOT_USERNAME):$(MONGO_ROOT_PASSWORD)@mongodb:27017/' && \
 	docker mcp secret set 'resend.api_key=$(RESEND_API_KEY)' && \
 	docker mcp secret set 'brave.api_key=$(BRAVE_API_KEY)' && \
 	docker mcp secret export brave resend mongodb > ./.mcp.env && \
