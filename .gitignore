@@ -5,3 +5,48 @@
 /.cursor/
 **/init-secrets.sh
 **/secret.openai-api-key
+
+# Environment files - NEVER commit these!
+**/.env
+**/.env.local
+**/.env.production
+**/.env.staging
+**/secrets.yaml
+**/secrets.yml
+
+# API Keys and Tokens
+**/api-keys/
+**/tokens/
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+**/credentials.json
+**/service-account.json
+
+# Database files and backups
+**/data/
+**/db/
+**/*.sql
+**/*.dump
+**/mongodb_data/
+**/mysql_data/
+
+# Temporary and cache files
+**/tmp/
+**/temp/
+**/.cache/
+**/node_modules/
+**/__pycache__/
+**/*.pyc
+**/*.log
+**/*.pid
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
