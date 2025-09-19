@@ -147,15 +147,15 @@
 #       run: echo "The scan was started on ${{ steps.start.outputs.url }}"
 
 
-name: "NeuraLegion"
+name: NeuraLegion
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
   schedule:
-    - cron: '29 3 * * 4'
+    - cron: 29 3 * * 4
 
 jobs:
   neuralegion_scan:
@@ -170,6 +170,6 @@ jobs:
           api_token: ${{ secrets.NEURALEGION_TOKEN }}
           name: GitHub scan ${{ github.sha }}
           discovery_types: |
-            [ "crawler" ]
+            [crawler]
           crawler_urls: |
-            [ "https://brokencrystals.com" ] # ✏️ Update this to the url you wish to scan
+            [https://brokencrystals.com] # ✏️ Update this to the url you wish to scan
