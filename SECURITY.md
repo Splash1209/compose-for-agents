@@ -82,7 +82,6 @@ If you find security vulnerabilities:
 ---
 
 **Remember: These are demo applications. Always implement proper security measures for production use.**
-=======
 ## Supported Versions
 
 Use this section to tell people about which versions of your project are
