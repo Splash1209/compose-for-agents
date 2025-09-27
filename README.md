@@ -1,5 +1,31 @@
 # Compose for Agents Demos
 
+## ⚠️ SECURITY WARNING
+
+**This repository contains demo applications with default configurations. Before running any demo:**
+
+1. **🔒 Change ALL default passwords** - Never use default database passwords in any environment
+2. **🔑 Set environment variables** - Copy `.env.template` to `.env` and set your actual credentials  
+3. **📖 Read the security guide** - See [SECURITY.md](./SECURITY.md) for complete security guidelines
+4. **🚫 Never commit secrets** - Ensure `.env` files and API keys are never committed to git
+
+**These demos are for educational purposes only. Do not use default configurations in production.**
+
+### 🛠️ Quick Security Setup
+
+After cloning this repository, run the security setup script:
+
+```bash
+./setup-security.sh
+```
+
+This will:
+- Install an optional pre-commit hook to prevent committing secrets
+- Create `.env` files from templates where needed
+- Provide security reminders and guidelines
+
+---
+
 ## Prerequisites
 
 + **[Docker Desktop] 4.43.0+ or [Docker Engine]** installed.
@@ -12,23 +38,34 @@
 
 ## Demos
 
-Each of these demos is self-contained and can be run either locally or using a cloud context. They
-are all configured using two steps.
+Each of these demos is self-contained and can be run either locally or using a cloud context. **⚠️ IMPORTANT: Follow security guidelines before running any demo.**
 
-1. change directory to the root of the demo project
-2. create a `.mcp.env` file from the `mcp.env.example` file (if it exists, otherwise the demo
-   doesn't need any secrets) and supply the required MCP tokens
-3. run `docker compose up --build`
+### Running a Demo Safely
+
+1. **Change directory** to the root of the demo project
+2. **Set up environment** - If there's a `.env.template` file, copy it to `.env` and set secure passwords
+3. **Create MCP configuration** - Create a `.mcp.env` file from the `mcp.env.example` file (if it exists) and supply the required MCP tokens
+4. **Review security** - Ensure no default passwords are being used
+5. **Run the demo** - `docker compose up --build`
+
+### ⚠️ Security Reminders for Each Demo
+
+- **Database credentials**: Always set strong passwords via environment variables
+- **API tokens**: Use your own API keys, never commit them to git
+- **Network exposure**: Be aware that demo configs may expose database ports
+- **Production use**: These are demos only - see [SECURITY.md](./SECURITY.md) for production guidelines
 
 ### Using OpenAI models
 
 The demos support using OpenAI models instead of running models locally with Docker Model Runner. To use OpenAI:
 
-1. Create a `secret.openai-api-key` file with your OpenAI API key:
+1. **⚠️ SECURITY**: Create a `secret.openai-api-key` file with your OpenAI API key (**never commit this file**):
 
     ```plaintext
-    sk-...
+    sk-your_actual_openai_api_key_here
     ```
+    
+    **Note**: This file is already in `.gitignore` to prevent accidental commits.
 
 2. Start the project with the OpenAI configuration:
 
