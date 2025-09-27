@@ -1,11 +1,25 @@
 # 🧠 ADK Multi-Agent Fact Checker
 
+## ⚠️ SECURITY WARNING - SETUP REQUIRED
+
+**This demo uses databases with default passwords. You MUST change them before running!**
+
+1. **Copy environment template:** `cp .env.template .env`
+2. **Set secure passwords** in the `.env` file (replace default values)
+3. **Never commit the `.env` file** to version control
+
+> [!IMPORTANT]
+> 🔒 **Database security required** — Set strong passwords in `.env` before running.
+
 > [!Tip]
-> ✨ No configuration needed — run it with a single command.
+> ✨ After security setup — run it with a single command.
 
 # 🚀 Getting Started
 
 ### Requirements
+
+> Your blockquote text
+> continues here without blank lines.
 
 + **[Docker Desktop] 4.43.0+ or [Docker Engine]** installed.
 + **A laptop or workstation with a GPU** (e.g., a MacBook) for running open models locally. If you
@@ -16,6 +30,16 @@
 + If you're using Docker Engine on Linux, ensure you have [Docker Compose] 2.38.1 or later installed.
 
 ### Run the project
+
+**⚠️ SECURITY FIRST**: Before running, set up database passwords:
+
+```sh
+# 1. Copy the environment template
+cp .env.template .env
+
+# 2. Edit .env and set secure passwords for MYSQL_ROOT_PASSWORD and MONGO_ROOT_PASSWORD
+# Never use default passwords like "password"!
+```
 
 Some of the MCP servers used here require Secrets. Set the Brave and Reset api keys and then set the secrets for the gateway.
 
