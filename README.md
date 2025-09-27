@@ -103,6 +103,14 @@ made by Docker in this repository.
 
 `SPDX-License-Identifier: Apache-2.0 OR MIT`
 
+## Development Setup
+
+To maintain code quality, you can:
+
++ Install an optional pre-commit hook to run markdownlint automatically.
+
+This will help ensure markdown files are properly formatted.
+
 [Docker Compose]: https://github.com/docker/compose
 [Docker Desktop]: https://www.docker.com/products/docker-desktop/
 [Docker Engine]: https://docs.docker.com/engine/

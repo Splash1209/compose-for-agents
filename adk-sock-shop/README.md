@@ -18,6 +18,9 @@
 
 ### Requirements
 
+> Your blockquote text
+> continues here without blank lines.
+
 + **[Docker Desktop] 4.43.0+ or [Docker Engine]** installed.
 + **A laptop or workstation with a GPU** (e.g., a MacBook) for running open models locally. If you
   don't have a GPU, you can alternatively use **[Docker Offload]**.
